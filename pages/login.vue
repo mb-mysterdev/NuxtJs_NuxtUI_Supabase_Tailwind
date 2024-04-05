@@ -36,8 +36,29 @@ const providers = [{
 }]
 
 function onSubmit (data: any) {
-  console.log('Submitted', data)
+  console.log('Submitted', )
+
+
+const supabase = useSupabaseClient()
+
+const loading = ref(false)
+const email = ref('')
+
+const handleLogin = async () => {
+  try {
+    loading.value = true
+    const { error } = await supabase.auth.signInWithOtp(data)
+    if (error) throw error
+    alert('Check your email for the login link!')
+  } catch (error) {
+    alert(error.error_description || error.message)
+  } finally {
+    loading.value = false
+  }
 }
+handleLogin()
+}
+
 </script>
 
 <!-- eslint-disable vue/multiline-html-element-content-newline -->
