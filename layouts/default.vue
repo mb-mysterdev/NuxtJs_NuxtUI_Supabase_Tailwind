@@ -3,6 +3,7 @@ const route = useRoute()
 const appConfig = useAppConfig()
 const { isHelpSlideoverOpen } = useDashboard()
 
+
 const links = [{
   id: 'home',
   label: 'Home',

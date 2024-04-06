@@ -2,6 +2,10 @@
 const { isHelpSlideoverOpen } = useDashboard()
 const { isDashboardSearchModalOpen } = useUIState()
 const { metaSymbol } = useShortcuts()
+const supabase = useSupabaseClient()
+const router = useRouter()
+
+
 
 const items = computed(() => [
   [{
@@ -41,7 +45,11 @@ const items = computed(() => [
     target: '_blank'
   }], [{
     label: 'Sign out',
-    icon: 'i-heroicons-arrow-left-on-rectangle'
+    icon: 'i-heroicons-arrow-left-on-rectangle',
+    click: () => {
+      supabase.auth.signOut()
+      router.push({name: 'login'})
+    }
   }]
 ])
 </script>

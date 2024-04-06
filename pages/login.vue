@@ -1,6 +1,17 @@
 <script setup lang="ts">
+
+const supabase = useSupabaseClient()
+const session = useSupabaseSession()
+const router = useRouter()
+
+console.log(session?.value?.access_token)
+
+if(session?.value?.access_token){
+  router.push({name : 'index'})
+}
+
 definePageMeta({
-  layout: 'auth'
+  layout: 'auth',
 })
 
 useSeoMeta({
@@ -39,17 +50,18 @@ function onSubmit (data: any) {
   console.log('Submitted', )
 
 
-const supabase = useSupabaseClient()
-
 const loading = ref(false)
-const email = ref('')
 
 const handleLogin = async () => {
   try {
     loading.value = true
-    const { error } = await supabase.auth.signInWithOtp(data)
-    if (error) throw error
-    alert('Check your email for the login link!')
+    const { error } = await supabase.auth.signInWithPassword(data)
+    if (error) {
+      throw error
+    }
+
+    
+    router.push({name: 'index'})
   } catch (error) {
     alert(error.error_description || error.message)
   } finally {

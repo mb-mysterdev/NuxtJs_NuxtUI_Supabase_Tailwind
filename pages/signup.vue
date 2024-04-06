@@ -1,4 +1,8 @@
 <script setup lang="ts">
+
+const supabase = useSupabaseClient()
+const router = useRouter()
+
 definePageMeta({
   layout: 'auth'
 })
@@ -42,6 +46,14 @@ const providers = [{
 
 function onSubmit (data: any) {
   console.log('Submitted', data)
+  try {
+    supabase.auth.signUp(data)
+    router.push({name: 'index'})
+
+  } catch(error) {
+    console.log(error)
+  }
+
 }
 </script>
 

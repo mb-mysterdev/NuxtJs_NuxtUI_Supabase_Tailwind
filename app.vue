@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const client = useSupabaseClient()
+const currentUser = useSupabaseUser()
+const {data: images} = useAsyncData('images', async () =>
+ client.from('images').select('*').order('created_at'))
 
 const colorMode = useColorMode()
 
