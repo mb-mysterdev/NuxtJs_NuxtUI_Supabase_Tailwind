@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/supabase'
   ],
-
+  supabase: {
+    redirect: false
+  },
   ui: {
     icons: ['heroicons', 'simple-icons'],
     safelistColors: ['primary', 'red', 'orange', 'green']
